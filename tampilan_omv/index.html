@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="header">
+        <div class="header-info">
+            <div class="header-date">
+                <span id="date"></span>
+                <span id="time"></span>
+            </div>
+            <div class="header-group">
+                <span>Group</span>
+                <select id="group">
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                </select>
+            </div>
+            <div class="header-operator">
+                <div>Operator 1: 
+                    <select id="operator1"></select>
+                </div>
+                <div>Operator 2: 
+                    <select id="operator2"></select>
+                </div>
+            </div>
+            <div class="header-line">
+                <span>Line</span>
+                <select id="line">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                </select>
+            </div>
+            <div class="header-color">
+                <span>Color</span>
+                <select id="color">
+                    <option value="White">White</option>
+                    <option value="Black">Black</option>
+                </select>
+            </div>
+        </div>
+        <div class="header-ok">
+            <button id="ok-button">OK</button>
+        </div>
+    </div>
+
+    <nav>
+        <button id="home">HALAMAN UTAMA</button>
+        <button id="history">RIWAYAT</button>
+        <button id="summary">SUMMARY</button>
+    </nav>
+
+    <div class="content">
+        <div class="step" id="colorStep">
+            <h3>COLOR</h3>
+            <p id="selectedColor">White</p>
+        </div>
+        <div class="step" id="step1">
+            <h3>STEP 1</h3>
+            <button id="next1">NEXT>></button>
+            <p id="countdown1"></p>
+        </div>
+        <div class="step" id="step2">
+            <h3>STEP 2</h3>
+            <button id="next2" disabled>NEXT>></button>
+            <p id="countdown2"></p>
+        </div>
+        <div class="step" id="step3">
+            <h3>STEP 3</h3>
+            <button id="finish" disabled>FINISH</button>
+            <p id="countdown3"></p>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

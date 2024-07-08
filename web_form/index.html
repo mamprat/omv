@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Form</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Masukan Data Anda</h1>
+        <form id="webForm">
+            <label for="nama">Masukan Nama:</label>
+            <input type="text" id="nama" nama="nama" required>
+            
+            <label for="email">Masukan Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="pesan">Masukan Pesan:</label>
+            <textarea id="pesan" name="Pesan" required></textarea>
+            
+            <button type="button" onclick="saveData()">Masukan</button>
+        </form>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>
