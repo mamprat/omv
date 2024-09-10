@@ -1,2 +1,75 @@
 https://drive.google.com/file/d/1sQ1eAIrMRSTzLzTQPtNRFQd9hT9wPhn1/view?usp=sharing
 https://drive.google.com/file/d/10cAx6a_EPkK3nSvvtllU5hSpaUJrokAe/view?usp=sharing
+
+
+//======= sensor arus ==========
+#include "EmonLib.h"
+
+//======= serial RS485==========
+#include <SoftwareSerial.h>
+
+// //======= sensor dan MAX485=======
+const int sensor = 1;  //A1
+const int pinReset = 8;
+#define DE 3
+#define RE 2
+
+//======= Inisialisasi =======
+EnergyMonitor emon1;
+const int threshold = 100;
+
+SoftwareSerial RS485Serial(10, 11);  // RX, TX
+
+static unsigned long OnDelay;
+unsigned long TimeOn = 20000;  // 30 Seconds
+
+unsigned long startTime;
+void (*reset)(void) = 0;
+int printCounter = 0;
+int jumlahReset = 10;
+
+void setup() {
+  digitalWrite(pinReset, HIGH);
+  delay(200);
+  pinMode(pinReset, OUTPUT);
+
+  Serial.begin(9600);
+  RS485Serial.begin(9600);
+  delay(100);
+  emon1.current(sensor, 600.600);  // Current: input pin A1, calibration (200/0.333).
+
+  pinMode(DE, OUTPUT);
+  pinMode(RE, OUTPUT);
+  digitalWrite(DE, HIGH);
+  digitalWrite(RE, HIGH);
+
+  OnDelay = 0 - TimeOn;  // Initialize OnDelay to be in the past so Timeout has occured and pin 8 is forced low
+  startTime = millis();  // Mencatat waktu mulai
+}
+
+void loop() {
+  int Irms = emon1.calcIrms(1480);  // Calculate Irms only
+  if (Irms > threshold) {
+    // RS485Serial.write(Irms);
+    // RS485Serial.read(Irms);
+    OnDelay = millis();
+  }
+
+  if (millis() - OnDelay >= (TimeOn)) {
+    Serial.println(Irms);
+    printCounter++;
+    delay(500);
+  } else {
+    Serial.println(Irms);
+    printCounter++;
+    delay(500);
+  }
+
+  if (printCounter >= jumlahReset) {
+    delay(100);
+    digitalWrite(pinReset, LOW);  // Nyalakan LED
+    delay(100);
+    reset();  // Memanggil fungsi reset
+  }
+}
+
